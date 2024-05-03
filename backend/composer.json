@@ -1,0 +1,11 @@
+{
+    "name": "hamzaasiddiqui/backend",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Hamza Siddiqui",
+            "email": "hamza.eins@gmail.com"
+        }
+    ],
+    "require": {}
+}
