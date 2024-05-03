@@ -31,8 +31,8 @@ export default function StudentLogin() {
       </form>
       <div className="d-flex mt-5">
         <a type="button" href="/dean_login" className="btn btn-info">Dean Login</a>
-        <button type="button" className="btn btn-info mx-2">Coordinator Login</button>
-        <button type="button" className="btn btn-info">Faculty Login</button>
+        <a type="button" href="/coordinator_login" className="btn btn-info mx-2">Coordinator Login</a>
+        <a type="button" href="/faculty_login" className="btn btn-info">Faculty Login</a>
       </div>
     </>
   )
