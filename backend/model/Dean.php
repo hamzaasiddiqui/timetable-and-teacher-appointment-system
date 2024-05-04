@@ -11,7 +11,7 @@ class Dean {
 
     // Method to get dean data for login
     public function getDeanData($deanID) {
-        $query = "SELECT deanid, password FROM " . $this->table_name . " WHERE deanid = :deanid";
+        $query = "SELECT deanid, password, departmentid FROM " . $this->table_name . " WHERE deanid = :deanid";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':deanid', $deanID);
         $stmt->execute();

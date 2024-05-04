@@ -1,37 +1,50 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import FacultyManagement from '../components/FacultyManagement';
+import CourseManagement from '../components/CourseManagement';
+import Timetable from '../components/Timetable';
 
 function DeanHome() {
     const navigate = useNavigate();
+    const [activeView, setActiveView] = useState('home'); // Default view
 
     const handleSignOut = () => {
-        // Clear authentication data
-        localStorage.removeItem('authToken'); // Assuming you store a token named 'authToken'
-        localStorage.removeItem('user'); // Clear user data if stored
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('user');
+        navigate('/dean_login');
+    };
 
-        // Redirect to login page or home page
-        navigate('/dean_login'); // Adjust the route as necessary
+    const setView = (view) => {
+        setActiveView(view);
     };
 
     return (
-        <div className="container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid m-0 p-0 h-100">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light p-3 w-100">
                 <a className="navbar-brand" href="#">Dean Dashboard</a>
-                <div className="collapse navbar-collapse">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Home</a>
+                <div className="collapse navbar-collapse flex justify-content-between">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={() => setView('courseManagement')}>Course Management</button>
                         </li>
-                        {/* Additional links */}
+                        <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={() => setView('facultyManagement')}>Faculty Management</button>
+                        </li>
+                        <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={() => setView('timetable')}>Timetable</button>
+                        </li>
                     </ul>
                     <button onClick={handleSignOut} className="btn btn-outline-danger">
                         Sign Out
                     </button>
                 </div>
             </nav>
-            {/* Content of the page */}
+
             <div className="mt-5">
-                <h1>Welcome to the Deans Dashboard</h1>
-                <p>This is your dashboard where you can manage all your activities.</p>
+                {activeView === 'courseManagement' && <CourseManagement />}
+                {activeView === 'facultyManagement' && <FacultyManagement />}
+                {activeView === 'timetable' && <Timetable />}
             </div>
         </div>
     );

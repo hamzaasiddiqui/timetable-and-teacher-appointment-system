@@ -5,7 +5,7 @@ export default function DeanLogin() {
   const [deanID, setDeanID] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();  // Create an instance of useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
         event.preventDefault();
@@ -25,7 +25,8 @@ export default function DeanLogin() {
           if (data.message === "Login successful") {
             console.log("Login Success:", data);
             localStorage.setItem('authToken', data.token);
-            navigate('/dean_home');  // Redirect to Dean Home page
+            localStorage.setItem('deanDepartmentID', data.departmentID)
+            navigate('/dean_home');
           } else {
             setError("Login Failed: " + data.message);  // Update error state
             console.log("Login Failed:", data.message);
