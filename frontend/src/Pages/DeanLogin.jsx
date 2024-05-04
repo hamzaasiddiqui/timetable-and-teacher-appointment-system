@@ -1,14 +1,15 @@
-import { useState } from "react"
-import axios from 'axios'
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';  // Import useNavigate from react-router-dom
 
 export default function DeanLogin() {
   const [deanID, setDeanID] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
+  const navigate = useNavigate();  // Create an instance of useNavigate
 
   const handleLogin = async (event) => {
         event.preventDefault();
-        console.log('handleLogin called')
+        console.log('handleLogin called');
 
         fetch('http://localhost:80/controller/login.php', {
           method: 'POST',
@@ -23,17 +24,19 @@ export default function DeanLogin() {
         .then(data => {
           if (data.message === "Login successful") {
             console.log("Login Success:", data);
+            localStorage.setItem('authToken', data.token);
+            navigate('/dean_home');  // Redirect to Dean Home page
           } else {
+            setError("Login Failed: " + data.message);  // Update error state
             console.log("Login Failed:", data.message);
           }
         })
         .catch(error => {
+          setError("Login error: Server error or connection issue.");
           console.error("Login error:", error);
         });
-
-
     };
-  
+
   return (
     <>
       <h1 className="mb-5">Dean Login</h1>
@@ -64,17 +67,13 @@ export default function DeanLogin() {
             Log In
           </button>
         </div>
-        <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
-        </p>
+        {error && <p>{error}</p>}
       </form>
-      {error && <p>{error}</p>}
       <div className="d-flex mt-5">
         <a type="button" href="/" className="btn btn-info">Student Login</a>
         <a type="button" href="/coordinator_login" className="btn btn-info mx-2">Coordinator Login</a>
         <a type="button" href="/faculty_login" className="btn btn-info">Faculty Login</a>
       </div>
     </>
-  )
-  }
-  
+  );
+}

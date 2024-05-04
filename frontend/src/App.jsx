@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage';
 import DeanLogin from './Pages/DeanLogin';
 import CoordinatorLogin from './Pages/CoordinatorLogin';
 import FacultyLogin from './Pages/FacultyLogin';
+import DeanHome from './Pages/DeanHome';
 
 
 
@@ -17,7 +18,7 @@ function App() {
         <Route path="/dean_login" element={<DeanLogin />} />
         <Route path="/coordinator_login" element={<CoordinatorLogin />} />
         <Route path="/faculty_login" element={<FacultyLogin />} />
-        
+        <Route path="/dean_home" element={<DeanHome />} />
       </Routes>
     </Router>
   )
