@@ -7,7 +7,7 @@ function StudentHome() {
         localStorage.removeItem('authToken'); // Assuming you store a token named 'authToken'
         localStorage.removeItem('user'); // Clear user data if stored
 
-        navigate('/student_login'); // Adjust the route as necessary
+        navigate('/'); // Adjust the route as necessary
     };
 
     return (
