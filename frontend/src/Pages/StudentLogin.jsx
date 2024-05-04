@@ -1,15 +1,55 @@
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom'; 
+
 export default function StudentLogin() {
+  const [studentID, setStudentID] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+      event.preventDefault();
+      console.log('handleLogin called');
+
+      fetch('http://localhost:80/controller/StudentLogin.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ studentID, password })
+      })
+      .then(response => response.text())  // Get the response text
+      .then(text => {
+        console.log("Raw response:", text);  // Log the raw text
+        return JSON.parse(text);  // Parse it as JSON
+      })
+      .then(data => {
+        if (data.message === "Login successful") {
+          console.log("Login Success:", data);
+          localStorage.setItem('authToken', data.token);
+          navigate('/student_home');  // Redirect to Dean Home page
+        } else {
+          setError("Login Failed: " + data.message);  // Update error state
+          console.log("Login Failed:", data.message);
+        }
+      })
+      .catch(error => {
+        setError("Login Failed: Inavlid Credentials.");
+        console.error("Login error:", error);
+      });
+  };
+
   return (
     <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
       <h1 className="mb-5">Student Login</h1>
-      <form style={{width: '50vw'}}>
+      <form onSubmit={handleLogin} style={{width: '50vw'}}>
         <h3>Sign In</h3>
         <div className="mb-3">
           <label>Email address</label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             placeholder="Enter email"
+            value={studentID}  // Ensure this matches the state
+            onChange={(e) => setStudentID(e.target.value)}  // Update state on change
           />
         </div>
         <div className="mb-3">
@@ -18,6 +58,8 @@ export default function StudentLogin() {
             type="password"
             className="form-control"
             placeholder="Enter password"
+            value={password}  // Ensure this matches the state
+            onChange={(e) => setPassword(e.target.value)}  // Update state on change
           />
         </div>
         <div className="d-grid">
@@ -25,9 +67,12 @@ export default function StudentLogin() {
             Log In
           </button>
         </div>
-        <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
-        </p>
+        {
+          error && 
+          <div className="alert alert-danger mt-2">
+            {error}
+          </div>
+        }
       </form>
       <div className="d-flex mt-5">
         <a type="button" href="/dean_login" className="btn btn-info">Dean Login</a>

@@ -7,6 +7,7 @@ import CoordinatorLogin from './Pages/CoordinatorLogin';
 import FacultyLogin from './Pages/FacultyLogin';
 import DeanHome from './Pages/DeanHome';
 import CoordinatorHome from './Pages/CoordinatorHome';
+import StudentHome from './Pages/StudentHome';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/faculty_login" element={<FacultyLogin />} />
         <Route path="/dean_home" element={<DeanHome />} />
         <Route path="/coordinator_home" element={<CoordinatorHome />} />
+        <Route path="/student_home" element={<StudentHome />} />
+
       </Routes>
     </Router>
   )
