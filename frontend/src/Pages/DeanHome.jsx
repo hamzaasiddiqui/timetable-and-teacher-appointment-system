@@ -7,7 +7,7 @@ import Timetable from '../components/Timetable';
 
 function DeanHome() {
     const navigate = useNavigate();
-    const [activeView, setActiveView] = useState('home'); // Default view
+    const [activeView, setActiveView] = useState('courseManagement'); // Default view
 
     const handleSignOut = () => {
         localStorage.removeItem('authToken');

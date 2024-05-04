@@ -214,7 +214,10 @@ export default function CourseManagement() {
                 <div className="col-md-6">
                     <div className="row">
                         <div className="col">
-                            <h2>Courses</h2>
+                            <div className="d-flex justify-content-between">
+                                <h2>Courses</h2>
+                                <button type="button" className="btn btn-primary" onClick={fetchCourses}>Refresh</button>
+                            </div>
                             <div className="table-responsive" style={{maxWidth: "800px"}}>
                                 <table className="table table-striped">
                                     <thead>
@@ -239,7 +242,10 @@ export default function CourseManagement() {
                     </div>
                     <div className="row">
                         <div className="col">
-                            <h2>Faculty Professors</h2>
+                            <div className="d-flex justify-content-between">
+                                <h2>Faculty Professors</h2>
+                                <button type="button" className="btn btn-primary" onClick={fetchProfessors}>Refresh</button>
+                            </div>
                             <div className="table-responsive" style={{maxWidth: "800px"}}>
                                 <table className="table table-striped">
                                     <thead>
