@@ -10,7 +10,7 @@ class Coordinator {
     }
 
     public function getCoordinatorData($coordinatorID) {
-        $query = "SELECT coordinatorid, password FROM " . $this->table_name . " WHERE coordinatorid = :coordinatorid";
+        $query = "SELECT coordinatorid, password, departmentid FROM " . $this->table_name . " WHERE coordinatorid = :coordinatorid";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':coordinatorid', $coordinatorID);
         $stmt->execute();
