@@ -12,6 +12,7 @@ function DeanHome() {
     const handleSignOut = () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('user');
+        localStorage.removeItem('departmentID')
         navigate('/dean_login');
     };
 

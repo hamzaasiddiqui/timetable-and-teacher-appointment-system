@@ -7,7 +7,7 @@ export default function FacultyManagement() {
     const [professors, setProfessors] = useState([]);
 
     useEffect(() => {
-        const storedDepartmentId = localStorage.getItem('deanDepartmentID');
+        const storedDepartmentId = localStorage.getItem('departmentID');
         if (storedDepartmentId) {
             const deptId = parseInt(storedDepartmentId); // Convert to integer if necessary
             setDepartmentId(deptId);

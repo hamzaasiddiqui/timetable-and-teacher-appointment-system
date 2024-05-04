@@ -25,7 +25,7 @@ export default function DeanLogin() {
           if (data.message === "Login successful") {
             console.log("Login Success:", data);
             localStorage.setItem('authToken', data.token);
-            localStorage.setItem('deanDepartmentID', data.departmentID)
+            localStorage.setItem('departmentID', data.departmentID)
             navigate('/dean_home');
           } else {
             setError("Login Failed: " + data.message);  // Update error state
