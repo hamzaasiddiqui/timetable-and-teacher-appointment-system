@@ -11,7 +11,7 @@ export default function DeanLogin() {
         event.preventDefault();
         console.log('handleLogin called');
 
-        fetch('http://localhost:80/controller/login.php', {
+        fetch('http://localhost:80/controller/DeanLogin.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ deanID, password })
@@ -32,7 +32,7 @@ export default function DeanLogin() {
           }
         })
         .catch(error => {
-          setError("Login error: Server error or connection issue.");
+          setError("Login Failed: Inavlid Credentials.");
           console.error("Login error:", error);
         });
     };
