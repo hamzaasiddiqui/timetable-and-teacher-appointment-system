@@ -1,8 +1,8 @@
 export default function CoordinatorLogin() {
     return (
-      <>
+      <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
         <h1 className="mb-5">Coordinator Login</h1>
-        <form>
+        <form style={{width: '50vw'}}>
           <h3>Sign In</h3>
           <div className="mb-3">
             <label>Email address</label>
@@ -34,7 +34,7 @@ export default function CoordinatorLogin() {
           <a type="button" href="/dean_login" className="btn btn-info mx-2">Dean Login</a>
           <a type="button" href="/faculty_login" className="btn btn-info">Faculty Login</a>
         </div>
-      </>
+      </div>
     )
   }
   

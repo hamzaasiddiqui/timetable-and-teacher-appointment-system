@@ -38,9 +38,9 @@ export default function DeanLogin() {
     };
 
   return (
-    <>
+    <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
       <h1 className="mb-5">Dean Login</h1>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} style={{width: '50vw'}}>
         <h3>Sign In</h3>
         <div className="mb-3">
           <label>Email address</label>
@@ -67,13 +67,18 @@ export default function DeanLogin() {
             Log In
           </button>
         </div>
-        {error && <p>{error}</p>}
+        {
+          error && 
+          <div className="alert alert-danger mt-2">
+            {error}
+          </div>
+        }
       </form>
       <div className="d-flex mt-5">
         <a type="button" href="/" className="btn btn-info">Student Login</a>
         <a type="button" href="/coordinator_login" className="btn btn-info mx-2">Coordinator Login</a>
         <a type="button" href="/faculty_login" className="btn btn-info">Faculty Login</a>
       </div>
-    </>
+    </div>
   );
 }
