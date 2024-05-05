@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import FacultyManagement from '../components/FacultyManagement';
 import CourseManagement from '../components/CourseManagement';
-import Timetable from '../components/Timetable';
-
+import CreateTimeTable from '../components/CreateTimetable';
 
 function CoordinatorHome() {
     const navigate = useNavigate();
@@ -46,7 +45,7 @@ function CoordinatorHome() {
             <div className="mt-5">
                 {activeView === 'courseManagement' && <CourseManagement />}
                 {activeView === 'facultyManagement' && <FacultyManagement />}
-                {activeView === 'timetable' && <Timetable />}
+                {activeView === 'timetable' && <CreateTimeTable />}
             </div>
         </div>
     );
