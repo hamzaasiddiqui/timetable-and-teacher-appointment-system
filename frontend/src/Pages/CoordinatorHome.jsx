@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import FacultyManagement from '../components/FacultyManagement';
 import CourseManagement from '../components/CourseManagement';
-import CreateTimeTable from '../components/CreateTimetable';
+import Timetable from '../components/Timetable';
+import CreateTimetable from '../components/CreateTimetable';
 
 function CoordinatorHome() {
     const navigate = useNavigate();
@@ -35,6 +36,9 @@ function CoordinatorHome() {
                         <li className="nav-item">
                             <button className="nav-link btn btn-link" onClick={() => setView('timetable')}>Timetable</button>
                         </li>
+                        <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={() => setView('createTimetable')}>Create Timetable</button>
+                        </li>
                     </ul>
                     <button onClick={handleSignOut} className="btn btn-outline-danger">
                         Sign Out
@@ -45,7 +49,8 @@ function CoordinatorHome() {
             <div className="mt-5">
                 {activeView === 'courseManagement' && <CourseManagement />}
                 {activeView === 'facultyManagement' && <FacultyManagement />}
-                {activeView === 'timetable' && <CreateTimeTable />}
+                {activeView === 'timetable' && <Timetable />}
+                {activeView === 'createTimetable' && <CreateTimetable />}
             </div>
         </div>
     );

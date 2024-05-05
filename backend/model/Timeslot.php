@@ -18,5 +18,16 @@ class Timeslot {
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$timetableID, $courseId, $startTime, $endTime, $day, $location]);
     }
+
+    public function fetchTimetableByDepartment($departmentID) {
+        // Query adjusted to order by starttime
+        $query = "SELECT t.*, c.title FROM timeslot t 
+                  JOIN course c ON t.courseid = c.courseid 
+                  WHERE c.departmentid = ? 
+                  ORDER BY t.starttime ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$departmentID]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }    
 }
 ?>
