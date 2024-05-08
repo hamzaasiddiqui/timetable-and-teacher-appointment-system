@@ -51,5 +51,13 @@ class Course {
             throw $e; // Re-throw the exception to be handled in the controller
         }
     }
+
+    public function unallocateProfessorFromCourse($courseId) {
+        $query = "UPDATE " . $this->table_name . " SET assignedfacultyid = NULL WHERE courseid = :courseId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':courseId', $courseId);
+        return $stmt->execute();
+    }
+    
 }
 ?>

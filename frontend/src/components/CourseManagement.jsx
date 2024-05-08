@@ -120,6 +120,34 @@ export default function CourseManagement() {
         });
     };
 
+    const handleUnallocateProfessor = (event) => {
+        event.preventDefault();
+        if (!allocateCourseId) {
+            alert('Please select a course.');
+            return;
+        }
+    
+        fetch('http://localhost:80/controller/UnallocateProfessor.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ courseId: allocateCourseId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success) {
+                fetchCourses(); // Refresh the list of courses
+                setAllocateCourseId(''); // Reset the course selection
+            }
+        })
+        .catch(error => {
+            console.error('Error unallocating professor:', error);
+            alert('Failed to unallocate professor');
+        });
+    };    
+
     const handleRemoveCourse = (event) => {
         event.preventDefault();
         if (!removeCourseId) {
@@ -242,11 +270,36 @@ export default function CourseManagement() {
                             <div className="card-header" id="headingThree">
                                 <h2 className="mb-0">
                                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Remove a Course
+                                        Unallocate Professor from Course
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div className="card-body">
+                                    <form onSubmit={handleUnallocateProfessor}>
+                                        <div className="form-group">
+                                            <label htmlFor="unallocateCourseId">Course ID</label>
+                                            <select className="form-control" id="unallocateCourseId" value={allocateCourseId} onChange={e => setAllocateCourseId(e.target.value)} required>
+                                                <option value="">Select a Course</option>
+                                                {courses.map(course => (
+                                                    <option key={course.courseid} value={course.courseid}>{course.courseid} - {course.title}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <button type="submit" className="btn btn-warning mt-2">Unallocate Professor</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card mb-2">
+                            <div className="card-header" id="headingThree">
+                                <h2 className="mb-0">
+                                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                        Remove a Course
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseFour" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <div className="card-body">
                                     <h6>
                                         <strong>Important Notice: </strong>
