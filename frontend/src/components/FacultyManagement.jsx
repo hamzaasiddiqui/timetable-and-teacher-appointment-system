@@ -69,6 +69,32 @@ export default function FacultyManagement() {
         });
     };
 
+    const handleRemoveProfessor = (event) => {
+        event.preventDefault();
+        if (!facultyID) {
+            alert('Please select a professor.');
+            return;
+        }
+    
+        fetch('http://localhost:80/controller/RemoveProfessor.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ facultyId: facultyID })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success) {
+                setFacultyId('');
+                fetchProfessors(); // Refresh the list of professors
+            }
+        })
+        .catch(error => {
+            console.error('Error removing professor:', error);
+            alert('Failed to remove professor');
+        });
+    };    
+
     return (
         <div className="container-fluid m-0 p-0" style={{height: '100vh'}}>
             <div className="row">
@@ -83,7 +109,6 @@ export default function FacultyManagement() {
                                     </button>
                                 </h2>
                             </div>
-
                             <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div className="card-body">
                                     <form onSubmit={handleAddProfessor}>
@@ -120,8 +145,35 @@ export default function FacultyManagement() {
                                               readOnly
                                             />
                                         </div>
-                                        <button type="submit" className="btn btn-primary">Add Course</button>
+                                        <button type="submit" className="btn btn-primary">Add Professor</button>
                                     </form>
+                                </div>
+                            </div>
+                            <div className="card mb-2">
+                                <div className="card-header" id="headingFour">
+                                    <h2 className="mb-0">
+                                        <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            Remove a Professor
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                    <div className="card-body">
+                                        <form onSubmit={handleRemoveProfessor}>
+                                            <div className="form-group">
+                                                <label htmlFor="removeFacultyId">Select Professor</label>
+                                                <select className="form-control" id="removeFacultyId" value={facultyID} onChange={e => setFacultyId(e.target.value)} required>
+                                                    <option value="">Select a Professor</option>
+                                                    {professors.map(professor => (
+                                                        <option key={professor.facultyid} value={professor.facultyid}>
+                                                            {professor.name} ({professor.facultyid})
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                            <button type="submit" className="btn btn-danger mt-2">Remove Professor</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

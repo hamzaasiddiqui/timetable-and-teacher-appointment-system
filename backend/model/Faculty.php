@@ -41,5 +41,21 @@ class Faculty {
     
         return false;
     }
+
+    public function isProfessorAssigned($facultyId) {
+        $query = "SELECT COUNT(*) AS assigned_count FROM course WHERE assignedfacultyid = :facultyId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':facultyId', $facultyId);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['assigned_count'] > 0;
+    }
+    
+    public function removeFaculty($facultyId) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE facultyid = :facultyId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':facultyId', $facultyId);
+        return $stmt->execute();
+    }
 }
 ?>
