@@ -1,7 +1,12 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import Timetable from '../components/Timetable';
 
 function StudentHome() {
     const navigate = useNavigate();
+    const [activeView, setActiveView] = useState('timetable'); // Default view
+
 
     const handleSignOut = () => {
         localStorage.removeItem('authToken'); // Assuming you store a token named 'authToken'
@@ -9,6 +14,10 @@ function StudentHome() {
         localStorage.removeItem('departmentID')
 
         navigate('/'); // Adjust the route as necessary
+    };
+
+    const setView = (view) => {
+        setActiveView(view);
     };
 
     return (
@@ -33,8 +42,7 @@ function StudentHome() {
         
             {/* Content of the page */}
             <div className="mt-5">
-                <h1>Welcome to the Student Dashboard</h1>
-                <p>This is your dashboard where you can manage all your activities.</p>
+                {activeView === 'timetable' && <Timetable />}
             </div>
     </div>
     );

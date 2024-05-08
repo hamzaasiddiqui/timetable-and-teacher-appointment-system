@@ -31,7 +31,7 @@ if (!$user) {
 
 if ($user && password_verify($password, $user['password'])) {
     http_response_code(200);
-    echo json_encode(["message" => "Login successful", "studentID" => $user['studentid']]);
+    echo json_encode(["message" => "Login successful", "studentID" => $user['studentid'], "departmentID" => $user['facultyid']]);
 } else {
     http_response_code(401);
     echo json_encode(["message" => "Login failed"]);

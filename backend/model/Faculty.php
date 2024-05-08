@@ -10,7 +10,7 @@ class Faculty {
     }
 
     public function getFacultyData($facultyID) {
-        $query = "SELECT facultyid, password FROM " . $this->table_name . " WHERE facultyid = :facultyid";
+        $query = "SELECT facultyid, password, departmentid FROM " . $this->table_name . " WHERE facultyid = :facultyid";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':facultyid', $facultyID);
         $stmt->execute();

@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import Timetable from '../components/Timetable';
 
 function FacultyHome() {
     const navigate = useNavigate();
+    const [activeView, setActiveView] = useState('timetable'); // Default view
 
     const handleSignOut = () => {
         // Clear authentication data
@@ -11,6 +15,10 @@ function FacultyHome() {
 
         // Redirect to login page or home page
         navigate('/faculty_login'); // Adjust the route as necessary
+    };
+
+    const setView = (view) => {
+        setActiveView(view);
     };
 
     return (
@@ -35,8 +43,7 @@ function FacultyHome() {
         
             {/* Content of the page */}
             <div className="mt-5">
-                <h1>Welcome to the Faculty Dashboard</h1>
-                <p>This is your dashboard where you can manage all your activities.</p>
+                {activeView === 'timetable' && <Timetable />}
             </div>
         </div>
     );

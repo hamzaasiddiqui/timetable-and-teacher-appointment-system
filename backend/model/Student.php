@@ -10,7 +10,7 @@ class Student {
     }
 
     public function getStudentData($studentID) {
-        $query = "SELECT studentid, password FROM " . $this->table_name . " WHERE studentid = :studentid";
+        $query = "SELECT studentid, password, facultyid FROM " . $this->table_name . " WHERE studentid = :studentid";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':studentid', $studentID);
         $stmt->execute();
