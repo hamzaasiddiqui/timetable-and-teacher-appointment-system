@@ -149,31 +149,31 @@ export default function FacultyManagement() {
                                     </form>
                                 </div>
                             </div>
-                            <div className="card mb-2">
-                                <div className="card-header" id="headingFour">
-                                    <h2 className="mb-0">
-                                        <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                            Remove a Professor
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                                    <div className="card-body">
-                                        <form onSubmit={handleRemoveProfessor}>
-                                            <div className="form-group">
-                                                <label htmlFor="removeFacultyId">Select Professor</label>
-                                                <select className="form-control" id="removeFacultyId" value={facultyID} onChange={e => setFacultyId(e.target.value)} required>
-                                                    <option value="">Select a Professor</option>
-                                                    {professors.map(professor => (
-                                                        <option key={professor.facultyid} value={professor.facultyid}>
-                                                            {professor.name} ({professor.facultyid})
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                            <button type="submit" className="btn btn-danger mt-2">Remove Professor</button>
-                                        </form>
-                                    </div>
+                        </div>
+                        <div className="card mb-2">
+                            <div className="card-header" id="headingFour">
+                                <h2 className="mb-0">
+                                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Remove a Professor
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                <div className="card-body">
+                                    <form onSubmit={handleRemoveProfessor}>
+                                        <div className="form-group">
+                                            <label htmlFor="removeFacultyId">Select Professor</label>
+                                            <select className="form-control" id="removeFacultyId" value={facultyID} onChange={e => setFacultyId(e.target.value)} required>
+                                                <option value="">Select a Professor</option>
+                                                {professors.map(professor => (
+                                                    <option key={professor.facultyid} value={professor.facultyid}>
+                                                        {professor.name} ({professor.facultyid})
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <button type="submit" className="btn btn-danger mt-2">Remove Professor</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
