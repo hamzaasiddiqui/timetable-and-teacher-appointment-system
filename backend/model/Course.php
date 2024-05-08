@@ -26,5 +26,30 @@ class Course {
         }
         return false;
     }
+
+    public function deleteCourse($courseId) {
+        // Start transaction
+        $this->conn->beginTransaction();
+        
+        try {
+            // Delete related timeslots first
+            $stmt = $this->conn->prepare("DELETE FROM timeslot WHERE courseid = ?");
+            $stmt->execute([$courseId]);
+    
+            // Then delete the course
+            $query = "DELETE FROM " . $this->table_name . " WHERE courseid = :courseId";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':courseId', $courseId);
+            $stmt->execute();
+    
+            // Commit transaction
+            $this->conn->commit();
+            return true;
+        } catch (PDOException $e) {
+            // Rollback transaction on error
+            $this->conn->rollback();
+            throw $e; // Re-throw the exception to be handled in the controller
+        }
+    }
 }
 ?>

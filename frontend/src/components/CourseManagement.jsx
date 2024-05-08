@@ -8,6 +8,7 @@ export default function CourseManagement() {
     const [professors, setProfessors] = useState([]);
     const [allocateCourseId, setAllocateCourseId] = useState('');
     const [allocateProfessorId, setAllocateProfessorId] = useState('');
+    const [removeCourseId, setRemoveCourseId] = useState('');
 
     // const departmentId = "1";
 
@@ -119,6 +120,34 @@ export default function CourseManagement() {
         });
     };
 
+    const handleRemoveCourse = (event) => {
+        event.preventDefault();
+        if (!removeCourseId) {
+            alert('Please select a course to remove.');
+            return;
+        }
+
+        fetch('http://localhost:80/controller/RemoveCourse.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ courseId: removeCourseId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            if (data.message.includes('successfully')) {
+                fetchCourses(); // Refresh courses list
+                setRemoveCourseId(''); // Reset selection
+            }
+        })
+        .catch(error => {
+            console.error('Error removing course:', error);
+            alert('Failed to remove course');
+        });
+    };
+
     return (
         <div className="container-fluid m-0 p-0" style={{height: '100vh'}}>
             <div className="row">
@@ -205,6 +234,40 @@ export default function CourseManagement() {
                                             </select>
                                         </div>
                                         <button type="submit" className="btn btn-primary mt-2">Allocate Professor</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card mb-2">
+                            <div className="card-header" id="headingThree">
+                                <h2 className="mb-0">
+                                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Remove a Course
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div className="card-body">
+                                    <h6>
+                                        <strong>Important Notice: </strong>
+                                        Removing a course will also remove any entries in the timetable relating to that course.
+                                    </h6>
+                                    <form onSubmit={handleRemoveCourse}>
+                                        <div className="form-group">
+                                            <label htmlFor="removeCourseId">Course ID</label>
+                                            <select 
+                                              className="form-control" 
+                                              id="removeCourseId" 
+                                              onChange={e => setRemoveCourseId(e.target.value)} 
+                                              required
+                                            >
+                                                <option value="">Select a Course to Remove</option>
+                                                {courses.map(course => (
+                                                    <option key={course.courseid} value={course.courseid}>{course.courseid} - {course.title}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <button type="submit" className="btn btn-danger mt-2">Remove Course</button>
                                     </form>
                                 </div>
                             </div>
