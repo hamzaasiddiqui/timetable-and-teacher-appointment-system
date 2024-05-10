@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import FacultyManagement from '../components/FacultyManagement';
 import CourseManagement from '../components/CourseManagement';
+import StudentManagement from '../components/StudentManagement';
 import Timetable from '../components/Timetable';
 import CreateTimetable from '../components/CreateTimetable';
 
@@ -34,6 +35,9 @@ function CoordinatorHome() {
                             <button className="nav-link btn btn-link" onClick={() => setView('facultyManagement')}>Faculty Management</button>
                         </li>
                         <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={() => setView('studentManagement')}>Student Management</button>
+                        </li>
+                        <li className="nav-item">
                             <button className="nav-link btn btn-link" onClick={() => setView('timetable')}>Timetable</button>
                         </li>
                         <li className="nav-item">
@@ -49,6 +53,7 @@ function CoordinatorHome() {
             <div className="mt-5">
                 {activeView === 'courseManagement' && <CourseManagement />}
                 {activeView === 'facultyManagement' && <FacultyManagement />}
+                {activeView === 'studentManagement' && <StudentManagement />}
                 {activeView === 'timetable' && <Timetable />}
                 {activeView === 'createTimetable' && <CreateTimetable />}
             </div>
