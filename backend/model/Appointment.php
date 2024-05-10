@@ -23,7 +23,6 @@ class Appointment {
     }
 
     public function getAppointmentsByStudentId($studentId) {
-        // Updated to include faculty's name
         $query = "SELECT a.*, fp.name as faculty_name FROM " . $this->table_name . " a
                   JOIN faculty_professors fp ON a.facultyid = fp.facultyid
                   WHERE a.studentid = ?";
@@ -31,6 +30,31 @@ class Appointment {
         $stmt->bindParam(1, $studentId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAppointmentsByFacultyId($facultyId) {
+        $query = "SELECT a.*, s.name as student_name FROM " . $this->table_name . " a
+                  JOIN student s ON a.studentid = s.studentid
+                  WHERE a.facultyid = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $facultyId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updateAppointmentStatus($appointmentId, $status) {
+        $query = "UPDATE " . $this->table_name . " SET status = ? WHERE appointmentid = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $status);
+        $stmt->bindParam(2, $appointmentId);
+        return $stmt->execute();
+    }
+
+    public function deleteAppointment($appointmentId) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE appointmentid = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $appointmentId);
+        return $stmt->execute();
     }
 }
 ?>

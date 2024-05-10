@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Timetable from '../components/Timetable';
+import FacultyAppointments from '../components/FacultyAppointments';
 
 function FacultyHome() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ function FacultyHome() {
                             <button className="nav-link btn btn-link" onClick={() => setView('timetable')}>Timetable</button>
                         </li>
                         <li className="nav-item">
-                            <button className="nav-link btn btn-link disabled">Appointment</button>
+                        <button className="nav-link btn btn-link" onClick={() => setView('appointments')}>Appointments</button>
                         </li>
                     </ul>
                     <button onClick={handleSignOut} className="btn btn-outline-danger">
@@ -45,6 +46,7 @@ function FacultyHome() {
             {/* Content of the page */}
             <div className="mt-5">
                 {activeView === 'timetable' && <Timetable />}
+                {activeView === 'appointments' && <FacultyAppointments />}
             </div>
         </div>
     );
