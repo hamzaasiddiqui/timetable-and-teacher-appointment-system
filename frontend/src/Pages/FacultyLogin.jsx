@@ -26,6 +26,7 @@ export default function FacultyLogin() {
           console.log("Login Success:", data);
           localStorage.setItem('authToken', data.token);
           localStorage.setItem('departmentID', data.departmentID)
+          localStorage.setItem('facultyID', data.facultyID)
           navigate('/faculty_home');  // Redirect to Dean Home page
         } else {
           setError("Login Failed: " + data.message);  // Update error state

@@ -26,6 +26,7 @@ export default function StudentLogin() {
           console.log("Login Success:", data);
           localStorage.setItem('authToken', data.token);
           localStorage.setItem('departmentID', data.departmentID)
+          localStorage.setItem('studentID', data.studentID)
           navigate('/student_home');  // Redirect to Dean Home page
         } else {
           setError("Login Failed: " + data.message);  // Update error state

@@ -12,6 +12,7 @@ function FacultyHome() {
         localStorage.removeItem('authToken'); // Assuming you store a token named 'authToken'
         localStorage.removeItem('user'); // Clear user data if stored
         localStorage.removeItem('departmentID')
+        localStorage.removeItem('facultyID')
 
         // Redirect to login page or home page
         navigate('/faculty_login'); // Adjust the route as necessary

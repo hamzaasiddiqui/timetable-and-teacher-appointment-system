@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Timetable from '../components/Timetable';
+import StudentAppointments from '../components/StudentAppointments';
 
 function StudentHome() {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ function StudentHome() {
         localStorage.removeItem('authToken'); // Assuming you store a token named 'authToken'
         localStorage.removeItem('user'); // Clear user data if stored
         localStorage.removeItem('departmentID')
+        localStorage.removeItem('studentID')
 
         navigate('/'); // Adjust the route as necessary
     };
@@ -30,7 +32,7 @@ function StudentHome() {
                             <button className="nav-link btn btn-link" onClick={() => setView('timetable')}>Timetable</button>
                         </li>
                         <li className="nav-item">
-                            <button className="nav-link btn btn-link disabled">Appointment</button>
+                            <button className="nav-link btn btn-link" onClick={() => setView('appointments')}>Appointments</button>
                         </li>
                     </ul>
                     <button onClick={handleSignOut} className="btn btn-outline-danger">
@@ -43,6 +45,7 @@ function StudentHome() {
             {/* Content of the page */}
             <div className="mt-5">
                 {activeView === 'timetable' && <Timetable />}
+                {activeView === 'appointments' && <StudentAppointments />}
             </div>
     </div>
     );
