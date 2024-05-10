@@ -10,7 +10,7 @@ class Student {
     }
 
     public function getStudentData($studentID) {
-        $query = "SELECT studentid, password, facultyid FROM " . $this->table_name . " WHERE studentid = :studentid";
+        $query = "SELECT studentid, password, name, major, facultyid FROM " . $this->table_name . " WHERE studentid = :studentid";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':studentid', $studentID);
         $stmt->execute();
@@ -38,5 +38,24 @@ class Student {
         $stmt->bindParam(1, $studentId);
         return $stmt->execute();
     }
+
+    public function verifyPassword($studentId, $currentPassword) {
+        $query = "SELECT password FROM " . $this->table_name . " WHERE studentid = :studentid";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':studentid', $studentId);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return password_verify($currentPassword, $result['password']);
+    }
+
+    public function changePassword($studentId, $newPassword) {
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $query = "UPDATE " . $this->table_name . " SET password = :password WHERE studentid = :studentid";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':studentid', $studentId);
+        return $stmt->execute();
+    }
 }
 ?>
+

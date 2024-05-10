@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Timetable from '../components/Timetable';
 import StudentAppointments from '../components/StudentAppointments';
+import StudentSettings from '../components/StudentSettings';
 
 function StudentHome() {
     const navigate = useNavigate();
@@ -34,6 +35,9 @@ function StudentHome() {
                         <li className="nav-item">
                             <button className="nav-link btn btn-link" onClick={() => setView('appointments')}>Appointments</button>
                         </li>
+                        <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={() => setView('settings')}>Settings</button>
+                        </li>
                     </ul>
                     <button onClick={handleSignOut} className="btn btn-outline-danger">
                         Sign Out
@@ -46,6 +50,7 @@ function StudentHome() {
             <div className="mt-5">
                 {activeView === 'timetable' && <Timetable />}
                 {activeView === 'appointments' && <StudentAppointments />}
+                {activeView === 'settings' && <StudentSettings />}
             </div>
     </div>
     );
