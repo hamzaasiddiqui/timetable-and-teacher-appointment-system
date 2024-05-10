@@ -24,7 +24,7 @@ if (!$facultyID || !$password) {
 $user = $faculty->getFacultyData($facultyID);
 
 if (!$user) {
-    http_response_code(404); // Not found status
+    http_response_code(404);
     echo json_encode(["message" => "Faculty Professor not found"]);
     exit;
 }

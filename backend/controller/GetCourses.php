@@ -9,7 +9,6 @@ $database = new Database();
 $db = $database->getConnection();
 $course = new Course($db);
 
-// Fetch all courses from the database
 $result = $course->getAllCourses();
 
 $courses = [];

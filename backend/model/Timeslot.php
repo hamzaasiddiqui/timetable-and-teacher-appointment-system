@@ -20,7 +20,6 @@ class Timeslot {
     }
 
     public function fetchTimetableByDepartment($departmentID) {
-        // Query adjusted to order by starttime
         $query = "SELECT t.*, c.title FROM timeslot t 
                   JOIN course c ON t.courseid = c.courseid 
                   WHERE c.departmentid = ? 

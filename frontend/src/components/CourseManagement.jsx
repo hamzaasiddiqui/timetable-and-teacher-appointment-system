@@ -15,9 +15,9 @@ export default function CourseManagement() {
     useEffect(() => {
         const storedDepartmentId = localStorage.getItem('departmentID');
         if (storedDepartmentId) {
-            const deptId = parseInt(storedDepartmentId); // Convert to integer if necessary
+            const deptId = parseInt(storedDepartmentId);
             setDepartmentId(deptId);
-            fetchCourses(deptId); // Ensure this is called after departmentId is set
+            fetchCourses(deptId);
             fetchProfessors(deptId)
         } else {
             console.log('Dean Department ID not found in local storage!')
@@ -33,7 +33,6 @@ export default function CourseManagement() {
         })
         .then(response => response.json())
         .then(data => {
-            // Filter courses by departmentId
             const filteredCourses = data.filter(course => parseInt(course.departmentid) === departmentId);
             setCourses(filteredCourses);
             console.log(filteredCourses)
@@ -52,7 +51,6 @@ export default function CourseManagement() {
         })
         .then(response => response.json())
         .then(data => {
-            // Filter courses by departmentId
             const filteredProfessors = data.filter(course => parseInt(course.departmentid) === departmentId);
             setProfessors(filteredProfessors);
             console.log(filteredProfessors)
@@ -83,7 +81,6 @@ export default function CourseManagement() {
         .then(data => {
             alert(data.message);
             if (data.success) {
-                // Reset form if successful
                 setCourseId('');
                 setCourseTitle('');
             }
@@ -111,7 +108,7 @@ export default function CourseManagement() {
         .then(data => {
             alert(data.message);
             if (data.message.includes('successfully')) {
-                fetchCourses(); // Refresh courses to update assigned professors
+                fetchCourses();
             }
         })
         .catch(error => {
@@ -138,8 +135,8 @@ export default function CourseManagement() {
         .then(data => {
             alert(data.message);
             if (data.success) {
-                fetchCourses(); // Refresh the list of courses
-                setAllocateCourseId(''); // Reset the course selection
+                fetchCourses();
+                setAllocateCourseId('');
             }
         })
         .catch(error => {
@@ -166,8 +163,8 @@ export default function CourseManagement() {
         .then(data => {
             alert(data.message);
             if (data.message.includes('successfully')) {
-                fetchCourses(); // Refresh courses list
-                setRemoveCourseId(''); // Reset selection
+                fetchCourses();
+                setRemoveCourseId('');
             }
         })
         .catch(error => {

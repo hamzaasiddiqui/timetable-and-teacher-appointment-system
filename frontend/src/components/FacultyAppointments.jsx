@@ -47,7 +47,7 @@ function FacultyAppointments() {
 
     return (
         <div className="container">
-            <h2>Faculty Appointments</h2>
+            <h2>Appointments</h2>
             <table className="table">
                 <thead>
                     <tr>

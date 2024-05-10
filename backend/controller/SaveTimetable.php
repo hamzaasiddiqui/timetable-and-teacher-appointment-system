@@ -25,10 +25,8 @@ try {
         exit;
     }
 
-    // Ensures the timetable ID is created or retrieved based on the department ID
     $timetableId = $timetable->getOrCreateTimetableId($departmentID);
 
-    // Delete old timeslots if any before adding new
     $timeslot->deleteTimeslotsByTimetableId($timetableId);
 
     foreach ($timetableData as $slot) {
@@ -38,7 +36,7 @@ try {
                 $location = $slot[$day]['venue'];
                 $startTime = $slot['startTime'];
                 $endTime = $slot['endTime'];
-                $processedDay = ucfirst($day);  // Make the first letter uppercase
+                $processedDay = ucfirst($day);
                 $timeslot->saveTimeslot($timetableId, $courseId, $startTime, $endTime, $processedDay, $location);
             }
         }

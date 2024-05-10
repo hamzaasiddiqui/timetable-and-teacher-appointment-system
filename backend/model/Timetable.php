@@ -13,14 +13,13 @@ class Timetable {
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$departmentId]);
         if ($stmt->fetch(PDO::FETCH_ASSOC)) {
-            return $departmentId;  // Existing timetable ID is returned
+            return $departmentId;
         }
 
-        // Insert a new timetable if it does not exist
         $insertQuery = "INSERT INTO timetable (timetableid) VALUES (?)";
         $insertStmt = $this->conn->prepare($insertQuery);
         $insertStmt->execute([$departmentId]);
-        return $departmentId;  // New timetable ID is the same as department ID
+        return $departmentId;
     }
 }
 ?>

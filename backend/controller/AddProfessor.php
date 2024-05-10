@@ -5,25 +5,20 @@ require_once '../model/Faculty.php';
 
 header("Content-Type: application/json");
 
-// Establish database connection
 $database = new Database();
 $db = $database->getConnection();
 $faculty = new Faculty($db);
 
-// Get JSON POST body
 $data = json_decode(file_get_contents("php://input"), true);
 
-// Check if necessary data is available
 if (!empty($data['facultyId']) && !empty($data['facultyName']) && isset($data['departmentId'])) {
     $facultyId = $data['facultyId'];
     $facultyName = $data['facultyName'];
     $departmentId = $data['departmentId'];
-    $defaultPassword = "faculty_professor"; // Default password
+    $defaultPassword = "faculty_professor";
 
-    // Hash the default password
     $hashedPassword = password_hash($defaultPassword, PASSWORD_DEFAULT);
 
-    // Call the function to add faculty member
     $result = $faculty->addFaculty($facultyId, $facultyName, $departmentId, $hashedPassword);
 
     if ($result) {

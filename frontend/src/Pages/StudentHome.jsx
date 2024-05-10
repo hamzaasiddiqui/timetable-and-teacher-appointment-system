@@ -6,16 +6,16 @@ import StudentAppointments from '../components/StudentAppointments';
 
 function StudentHome() {
     const navigate = useNavigate();
-    const [activeView, setActiveView] = useState('timetable'); // Default view
+    const [activeView, setActiveView] = useState('timetable');
 
 
     const handleSignOut = () => {
-        localStorage.removeItem('authToken'); // Assuming you store a token named 'authToken'
-        localStorage.removeItem('user'); // Clear user data if stored
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('user');
         localStorage.removeItem('departmentID')
         localStorage.removeItem('studentID')
 
-        navigate('/'); // Adjust the route as necessary
+        navigate('/');
     };
 
     const setView = (view) => {

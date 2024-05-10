@@ -27,7 +27,7 @@ function StudentAppointments() {
         fetch(`http://localhost:80/controller/GetAppointments.php?studentId=${studentId}`)
             .then(response => response.json())
             .then(data => {
-                setAppointments(data.data);  // Assuming the data comes in a property named data
+                setAppointments(data.data);
             })
             .catch(error => console.error('Error fetching appointments:', error));
     };
@@ -85,7 +85,7 @@ function StudentAppointments() {
                             <label htmlFor="purpose">Purpose</label>
                             <textarea className="form-control" value={purpose} onChange={e => setPurpose(e.target.value)} required></textarea>
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>
                 <div className="col-md-6">

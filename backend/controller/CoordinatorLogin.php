@@ -9,7 +9,6 @@ $database = new Database();
 $db = $database->getConnection();
 $coordinator = new Coordinator($db);
 
-// Decode JSON POST input
 $data = json_decode(file_get_contents("php://input"), true);
 
 $coordinatorID = $data['coordinatorID'] ?? '';
@@ -22,7 +21,6 @@ if (!$coordinatorID || !$password) {
     exit;
 }
 
-// Using the Coordinator model to get coordinator data
 $user = $coordinator->getCoordinatorData($coordinatorID);
 
 if (!$user) {

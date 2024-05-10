@@ -9,7 +9,6 @@ $database = new Database();
 $db = $database->getConnection();
 $dean = new Dean($db);
 
-// Decode JSON POST input
 $data = json_decode(file_get_contents("php://input"), true);
 
 $deanID = $data['deanID'] ?? '';
@@ -22,11 +21,10 @@ if (!$deanID || !$password) {
     exit;
 }
 
-// Using the Dean model to get dean data
 $user = $dean->getDeanData($deanID);
 
 if (!$user) {
-    http_response_code(404); // Not found status
+    http_response_code(404);
     echo json_encode(["message" => "Dean not found"]);
     exit;
 }

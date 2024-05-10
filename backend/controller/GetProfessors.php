@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 $database = new Database();
 $db = $database->getConnection();
-$faculty = new Faculty($db); // Correct variable naming
+$faculty = new Faculty($db);
 
 $result = $faculty->getAllFaculty();
 $professors = [];

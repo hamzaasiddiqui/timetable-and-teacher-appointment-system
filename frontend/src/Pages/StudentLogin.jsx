@@ -16,10 +16,10 @@ export default function StudentLogin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ studentID, password })
       })
-      .then(response => response.text())  // Get the response text
+      .then(response => response.text())
       .then(text => {
-        console.log("Raw response:", text);  // Log the raw text
-        return JSON.parse(text);  // Parse it as JSON
+        console.log("Raw response:", text);
+        return JSON.parse(text);
       })
       .then(data => {
         if (data.message === "Login successful") {
@@ -27,9 +27,9 @@ export default function StudentLogin() {
           localStorage.setItem('authToken', data.token);
           localStorage.setItem('departmentID', data.departmentID)
           localStorage.setItem('studentID', data.studentID)
-          navigate('/student_home');  // Redirect to Dean Home page
+          navigate('/student_home');
         } else {
-          setError("Login Failed: " + data.message);  // Update error state
+          setError("Login Failed: " + data.message);
           console.log("Login Failed:", data.message);
         }
       })
@@ -50,8 +50,8 @@ export default function StudentLogin() {
             type="text"
             className="form-control"
             placeholder="Enter email"
-            value={studentID}  // Ensure this matches the state
-            onChange={(e) => setStudentID(e.target.value)}  // Update state on change
+            value={studentID}
+            onChange={(e) => setStudentID(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -60,8 +60,8 @@ export default function StudentLogin() {
             type="password"
             className="form-control"
             placeholder="Enter password"
-            value={password}  // Ensure this matches the state
-            onChange={(e) => setPassword(e.target.value)}  // Update state on change
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="d-grid">

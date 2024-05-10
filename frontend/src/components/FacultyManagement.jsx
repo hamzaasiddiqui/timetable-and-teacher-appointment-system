@@ -9,7 +9,7 @@ export default function FacultyManagement() {
     useEffect(() => {
         const storedDepartmentId = localStorage.getItem('departmentID');
         if (storedDepartmentId) {
-            const deptId = parseInt(storedDepartmentId); // Convert to integer if necessary
+            const deptId = parseInt(storedDepartmentId);
             setDepartmentId(deptId);
             fetchProfessors(deptId)
         } else {
@@ -26,7 +26,6 @@ export default function FacultyManagement() {
         })
         .then(response => response.json())
         .then(data => {
-            // Filter courses by departmentId
             const filteredProfessors = data.filter(course => parseInt(course.departmentid) === departmentId);
             setProfessors(filteredProfessors);
             console.log(filteredProfessors)
@@ -58,7 +57,6 @@ export default function FacultyManagement() {
         .then(data => {
             alert(data.message);
             if (data.success) {
-                // Reset form if successful
                 setFacultyId('');
                 setFacultyName('');
             }
@@ -86,7 +84,7 @@ export default function FacultyManagement() {
             alert(data.message);
             if (data.success) {
                 setFacultyId('');
-                fetchProfessors(); // Refresh the list of professors
+                fetchProfessors();
             }
         })
         .catch(error => {

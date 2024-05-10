@@ -14,7 +14,6 @@ $course = new Course($db);
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!empty($data['facultyId'])) {
-    // Check if the professor is assigned to any course
     if ($faculty->isProfessorAssigned($data['facultyId'])) {
         http_response_code(400);
         echo json_encode(['message' => 'Professor is assigned to a course. Unallocate professor first.', 'success' => false]);

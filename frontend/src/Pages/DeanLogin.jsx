@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';  // Import useNavigate from react-router-dom
+import { useNavigate } from 'react-router-dom';
 
 export default function DeanLogin() {
   const [deanID, setDeanID] = useState('');
@@ -16,10 +16,10 @@ export default function DeanLogin() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ deanID, password })
         })
-        .then(response => response.text())  // Get the response text
+        .then(response => response.text())
         .then(text => {
-          console.log("Raw response:", text);  // Log the raw text
-          return JSON.parse(text);  // Parse it as JSON
+          console.log("Raw response:", text);
+          return JSON.parse(text);
         })
         .then(data => {
           if (data.message === "Login successful") {
@@ -28,7 +28,7 @@ export default function DeanLogin() {
             localStorage.setItem('departmentID', data.departmentID)
             navigate('/dean_home');
           } else {
-            setError("Login Failed: " + data.message);  // Update error state
+            setError("Login Failed: " + data.message);
             console.log("Login Failed:", data.message);
           }
         })
@@ -49,8 +49,8 @@ export default function DeanLogin() {
             type="text"
             className="form-control"
             placeholder="Enter email"
-            value={deanID}  // Ensure this matches the state
-            onChange={(e) => setDeanID(e.target.value)}  // Update state on change
+            value={deanID}
+            onChange={(e) => setDeanID(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -59,8 +59,8 @@ export default function DeanLogin() {
             type="password"
             className="form-control"
             placeholder="Enter password"
-            value={password}  // Ensure this matches the state
-            onChange={(e) => setPassword(e.target.value)}  // Update state on change
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="d-grid">

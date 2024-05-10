@@ -16,19 +16,19 @@ export default function CoordinatorLogin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ coordinatorID, password })
       })
-      .then(response => response.text())  // Get the response text
+      .then(response => response.text())
       .then(text => {
-        console.log("Raw response:", text);  // Log the raw text
-        return JSON.parse(text);  // Parse it as JSON
+        console.log("Raw response:", text);
+        return JSON.parse(text);
       })
       .then(data => {
         if (data.message === "Login successful") {
           console.log("Login Success:", data);
           localStorage.setItem('authToken', data.token);
           localStorage.setItem('departmentID', data.departmentID)
-          navigate('/coordinator_home');  // Redirect to Dean Home page
+          navigate('/coordinator_home');
         } else {
-          setError("Login Failed: " + data.message);  // Update error state
+          setError("Login Failed: " + data.message);
           console.log("Login Failed:", data.message);
         }
       })
@@ -49,8 +49,8 @@ export default function CoordinatorLogin() {
               type="text"
               className="form-control"
               placeholder="Enter email"
-              value={coordinatorID}  // Ensure this matches the state
-              onChange={(e) => setCoordinatorID(e.target.value)}  // Update state on change
+              value={coordinatorID}
+              onChange={(e) => setCoordinatorID(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -59,8 +59,8 @@ export default function CoordinatorLogin() {
               type="password"
               className="form-control"
               placeholder="Enter password"
-              value={password}  // Ensure this matches the state
-              onChange={(e) => setPassword(e.target.value)}  // Update state on change
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="d-grid">
