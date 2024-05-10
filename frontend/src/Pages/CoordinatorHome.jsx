@@ -24,27 +24,30 @@ function CoordinatorHome() {
 
     return (
         <div className="container-fluid m-0 p-0 h-100">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light p-3 w-100">
-                <a className="navbar-brand" href="#">Coordinator Dashboard</a>
-                <div className="collapse navbar-collapse flex justify-content-between">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <a className="navbar-brand ms-3" href="#">Coordinator Dashboard</a>
+                <button className="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav me-auto">
+                        <li className="nav-item ms-3">
                             <button className="nav-link btn btn-link" onClick={() => setView('courseManagement')}>Course Management</button>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item ms-3">
                             <button className="nav-link btn btn-link" onClick={() => setView('facultyManagement')}>Faculty Management</button>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item ms-3">
                             <button className="nav-link btn btn-link" onClick={() => setView('studentManagement')}>Student Management</button>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item ms-3">
                             <button className="nav-link btn btn-link" onClick={() => setView('timetable')}>Timetable</button>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item ms-3">
                             <button className="nav-link btn btn-link" onClick={() => setView('createTimetable')}>Create Timetable</button>
                         </li>
                     </ul>
-                    <button onClick={handleSignOut} className="btn btn-outline-danger">
+                    <button onClick={handleSignOut} className="btn btn-outline-danger me-3">
                         Sign Out
                     </button>
                 </div>

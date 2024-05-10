@@ -41,7 +41,8 @@ export default function StudentLogin() {
 
   return (
     <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
-      <h1 className="mb-5">Student Login</h1>
+      <h1>Timetable and Teacher Appointment System</h1>
+      <h2 className="mb-5">Student Login</h2>
       <form onSubmit={handleLogin} style={{width: '50vw'}}>
         <h3>Sign In</h3>
         <div className="mb-3">
