@@ -46,7 +46,7 @@ function StudentSettings() {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-6 mb-5">
                     <h3>Student Details</h3>
                     <p><strong>ID:</strong> {studentId}</p>
                     <p><strong>Name:</strong> {studentDetails.name}</p>
@@ -67,7 +67,7 @@ function StudentSettings() {
                             <label>Confirm New Password</label>
                             <input type="password" className="form-control" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
                         </div>
-                        <button type="submit" className="btn btn-primary">Change Password</button>
+                        <button type="submit" className="btn btn-primary mt-2 mb-5">Change Password</button>
                     </form>
                 </div>
             </div>
