@@ -45,11 +45,11 @@ export default function CoordinatorLogin() {
         <form onSubmit={handleLogin} style={{width: '50vw'}}>
           <h3>Sign In</h3>
           <div className="mb-3">
-            <label>Email address</label>
+            <label>ID</label>
             <input
               type="text"
               className="form-control"
-              placeholder="Enter email"
+              placeholder="Enter ID"
               value={coordinatorID}
               onChange={(e) => setCoordinatorID(e.target.value)}
             />
